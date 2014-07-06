@@ -1,0 +1,3 @@
+$cluster = Get-Cluster -Name clustername
+   $vmsInGroup = $cluster.ExtensionData.ConfigurationEx.Group | Where {$_ -is [VMware.Vim.ClusterVmGroup]} | %{Get-View -Id $_.VM | Select -ExpandProperty Name}
+    Get-VM -Location $cluster | Where {$vmsInGroup -notcontains $_.Name} | Select -ExpandProperty Name
